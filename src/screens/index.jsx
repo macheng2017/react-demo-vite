@@ -21,6 +21,6 @@ export const ProjectListScreen = () => {
     // 这里的[param]变化的时候去同步,去请求
     return <div>
         <SearchPanel param={param} setParam={setParam}/>
-        <List/>
+        <List list={list}/>
     </div>
 }
