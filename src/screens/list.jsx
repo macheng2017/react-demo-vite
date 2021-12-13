@@ -1,5 +1,5 @@
-export const SearchPanel = ()=>{
-    return <form action="">
+export const List = ()=>{
+    return <div>
 
-    </form>
+    </div>
 }
