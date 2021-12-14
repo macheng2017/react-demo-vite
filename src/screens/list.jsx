@@ -8,12 +8,14 @@ export const List = ({list}) => {
         </thead>
         <tbody>
         {
-            list.map((project =>
-                    <tr>
-                        <td>{project.name}</td>
-                        <td>{project.personId}</td>
-                    </tr>
-            ))
+            list.map(project => {
+                    return (
+                        <tr key={project.id}>
+                            <td>{project.name}</td>
+                            <td>{project.personId}</td>
+                        </tr>)
+                }
+            )
         }
         </tbody>
     </table>
