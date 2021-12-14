@@ -1,4 +1,8 @@
-export const List = ({list}) => {
+export const List = ({list, users}) => {
+    // const newList = list.map(item => {
+    //     return users.find(user => item.personId === user.personId ? item.name : item.personId)
+    // })
+    // 下面的做法是直接输入显示了,这里的想法是想生成一个新的数组再到下面循环使用
     return <table>
         <thead>
         <tr>
@@ -12,7 +16,8 @@ export const List = ({list}) => {
                     return (
                         <tr key={project.id}>
                             <td>{project.name}</td>
-                            <td>{project.personId}</td>
+                            {/*这里需要好好琢磨一下,注意这里在map里面*/}
+                            <td>{users.find(v=>v.id === project.personId)?.name||'未知'}</td>
                         </tr>)
                 }
             )
