@@ -17,6 +17,9 @@ export const List = ({list, users}) => {
                         <tr key={project.id}>
                             <td>{project.name}</td>
                             {/*这里需要好好琢磨一下,注意这里在map里面*/}
+                            {/*find 很可能会返回undefined,使用? 可以如果前面返回一个undefined.name则整个表达式都会返回undefined而不会报错
+                            也就是保证不出错可以配合||使用
+                            */}
                             <td>{users.find(v=>v.id === project.personId)?.name||'未知'}</td>
                         </tr>)
                 }

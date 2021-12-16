@@ -1,6 +1,8 @@
 import {List} from "./list";
 import {useEffect, useState} from "react";
 import {SearchPanel} from "./search-panel";
+import {CleanObj} from "../utils";
+import qs from "qs";
 // vite 上与webpack不同的地方 [环境变量和模式 | Vite 官方中文文档](https://cn.vitejs.dev/guide/env-and-mode.html)
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
 export const ProjectListScreen = () => {
@@ -14,12 +16,12 @@ export const ProjectListScreen = () => {
     const [users, setUsers] = useState([])
     useEffect(() => {
         //[Using Fetch - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-        fetch(`${apiUrl}/projects`).then(async resp => {
+        fetch(`${apiUrl}/projects?${qs.stringify(CleanObj(param))}`).then(async resp => {
+            // 这里使用了一个qs的第三方的库,方便以后扩展查询字符串
             if (resp.ok) {
-                console.log("apiUrl", apiUrl)
+                // console.log("apiUrl", apiUrl)
                 setList(await resp.json())
-                setUsers(list)
-                console.log("list", list)
+                // console.log("list", list)
             }
         })
     }, [param])
@@ -28,10 +30,11 @@ export const ProjectListScreen = () => {
             async resp => {
                 if (resp.ok) {
                     setUsers(await resp.json())
+                    // console.log("users", users)
                 }
             }
         )
-    }, [param])
+    }, []) // 空数组可以让页面渲染的时候只执行一次
 
     // 这里的[param]变化的时候去同步,去请求
     return <div>
