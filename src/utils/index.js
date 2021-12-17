@@ -1,3 +1,5 @@
+import {useEffect} from "react";
+
 const isFalsy = res => {
     // 这里的函数的作用是为了排除if(res[k]); res[k]=0有意义的这种情况的
     // !!res 可以把结果转化为Boolean值
@@ -12,3 +14,11 @@ export const CleanObj = (obj) => {
     })
     return res
 }
+// 创建一个自定义hook,来替换只加载一次的useEffect
+export const useMount = (callback) => {
+    useEffect(() => {
+        callback()
+    }, [])
+}
+// 注意上面的写法 与 直接写callback 有什么区别?
+// useEffect(callback, [])

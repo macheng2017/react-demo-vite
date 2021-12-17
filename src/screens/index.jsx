@@ -1,7 +1,7 @@
 import {List} from "./list";
 import {useEffect, useState} from "react";
 import {SearchPanel} from "./search-panel";
-import {CleanObj} from "../utils";
+import {CleanObj, useMount} from "../utils";
 import qs from "qs";
 // vite 上与webpack不同的地方 [环境变量和模式 | Vite 官方中文文档](https://cn.vitejs.dev/guide/env-and-mode.html)
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
@@ -25,7 +25,8 @@ export const ProjectListScreen = () => {
             }
         })
     }, [param])
-    useEffect(() => {
+    // 使用自定义hook
+    useMount(() => {
         fetch(`${apiUrl}/users`).then(
             async resp => {
                 if (resp.ok) {
@@ -34,7 +35,7 @@ export const ProjectListScreen = () => {
                 }
             }
         )
-    }, []) // 空数组可以让页面渲染的时候只执行一次
+    }) // 空数组可以让页面渲染的时候只执行一次
 
     // 这里的[param]变化的时候去同步,去请求
     return <div>
