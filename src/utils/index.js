@@ -38,5 +38,13 @@ export const useMount = (callback) => {
 // const log = debounce(()=>{ console.log('hello')},2000)
 
 export const useDebounce = (param, delay) => {
-
+    let timeout
+    return function (param) {
+        if (timeout) {
+            clearTimeout(timeout)
+        }
+        timeout = setTimeout(() => {
+            param()
+        }, delay)
+    }
 }

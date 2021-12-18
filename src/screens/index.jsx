@@ -10,14 +10,14 @@ export const ProjectListScreen = () => {
         name: "",
         personId: ""
     })
-    const debounced = useDebounce(param,2000)
+    const debouncedParam = useDebounce(param, 2000)
     // 请求项目列表的api需要用到useEffect
     // 这个组件中的list其他组件也需要用到,需要状态提升到父组件当中
     const [list, setList] = useState([])
     const [users, setUsers] = useState([])
     useEffect(() => {
         //[Using Fetch - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-        fetch(`${apiUrl}/projects?${qs.stringify(CleanObj(param))}`).then(async resp => {
+        fetch(`${apiUrl}/projects?${qs.stringify(CleanObj(debouncedParam))}`).then(async resp => {
             // 这里使用了一个qs的第三方的库,方便以后扩展查询字符串
             if (resp.ok) {
                 // console.log("apiUrl", apiUrl)
