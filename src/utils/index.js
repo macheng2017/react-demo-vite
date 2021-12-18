@@ -22,3 +22,21 @@ export const useMount = (callback) => {
 }
 // 注意上面的写法 与 直接写callback 有什么区别?
 // useEffect(callback, [])
+
+// const debounce = (func, delay) => {
+//     let timeout
+//     return function () {
+//         if (timeout) {
+//             clearTimeout(timeout)
+//         }
+//         timeout = setTimeout(() => {
+//             func()
+//         }, delay)
+//     }
+// }
+//
+// const log = debounce(()=>{ console.log('hello')},2000)
+
+export const useDebounce = (param, delay) => {
+
+}

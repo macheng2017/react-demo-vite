@@ -1,7 +1,7 @@
 import {List} from "./list";
 import {useEffect, useState} from "react";
 import {SearchPanel} from "./search-panel";
-import {CleanObj, useMount} from "../utils";
+import {CleanObj, useDebounce, useMount} from "../utils";
 import qs from "qs";
 // vite 上与webpack不同的地方 [环境变量和模式 | Vite 官方中文文档](https://cn.vitejs.dev/guide/env-and-mode.html)
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
@@ -10,6 +10,7 @@ export const ProjectListScreen = () => {
         name: "",
         personId: ""
     })
+    const debounced = useDebounce(param,2000)
     // 请求项目列表的api需要用到useEffect
     // 这个组件中的list其他组件也需要用到,需要状态提升到父组件当中
     const [list, setList] = useState([])
