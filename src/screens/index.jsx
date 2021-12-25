@@ -25,7 +25,7 @@ export const ProjectListScreen = () => {
                 // console.log("list", list)
             }
         })
-    }, [param])
+    }, [debouncedParam])
     // 使用自定义hook
     useMount(() => {
         fetch(`${apiUrl}/users`).then(

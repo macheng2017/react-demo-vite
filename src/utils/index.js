@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const isFalsy = res => {
     // 这里的函数的作用是为了排除if(res[k]); res[k]=0有意义的这种情况的
@@ -36,15 +36,16 @@ export const useMount = (callback) => {
 // }
 //
 // const log = debounce(()=>{ console.log('hello')},2000)
-
-export const useDebounce = (param, delay) => {
-    let timeout
-    return function (param) {
-        if (timeout) {
-            clearTimeout(timeout)
-        }
-        timeout = setTimeout(() => {
-            param()
-        }, delay)
-    }
+// log()
+// log()
+export const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebounceValue] = useState(value)
+    useEffect(() => {
+        // 1. 设定一个延迟更新 delay延迟时间的间隔
+        const timeout = setTimeout(() => setDebounceValue(value), delay)
+        // 2. 第一次执行时,在延迟时间还没到时timeout为空,这时候执行clearTimeout(timeout)是清空了个寂寞
+        // 3. 当第二次执行的时候
+        return () => clearTimeout(timeout)
+    }, [value, delay])
+    return debouncedValue
 }
