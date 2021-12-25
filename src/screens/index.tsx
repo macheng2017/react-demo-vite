@@ -10,7 +10,7 @@ export const ProjectListScreen = () => {
         name: "",
         personId: ""
     })
-    const debouncedParam = useDebounce(param, 2000)
+    const debouncedParam = useDebounce(param, 200)
     // 请求项目列表的api需要用到useEffect
     // 这个组件中的list其他组件也需要用到,需要状态提升到父组件当中
     const [list, setList] = useState([])

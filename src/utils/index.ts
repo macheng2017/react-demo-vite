@@ -1,21 +1,23 @@
 import {useEffect, useState} from "react";
 
-const isFalsy = res => {
+const isFalsy = (res: any) => {
     // 这里的函数的作用是为了排除if(res[k]); res[k]=0有意义的这种情况的
     // !!res 可以把结果转化为Boolean值
     return res === 0 ? true : !!res
 }
-export const CleanObj = (obj) => {
+export const CleanObj = (obj: object) => {
     const res = {...obj}
     Object.keys(res).forEach(k => {
+        // @ts-ignore
         if (!isFalsy(res[k])) {
+            // @ts-ignore
             delete res[k]
         }
     })
     return res
 }
 // 创建一个自定义hook,来替换只加载一次的useEffect
-export const useMount = (callback) => {
+export const useMount = (callback: () => void) => {
     useEffect(() => {
         callback()
     }, [])
@@ -38,7 +40,7 @@ export const useMount = (callback) => {
 // const log = debounce(()=>{ console.log('hello')},2000)
 // log()
 // log()
-export const useDebounce = (value, delay) => {
+export const useDebounce = (value: any, delay?: number) => {
     const [debouncedValue, setDebounceValue] = useState(value)
     useEffect(() => {
         // 1. 设定一个延迟更新 delay延迟时间的间隔
