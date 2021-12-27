@@ -40,7 +40,7 @@ export const useMount = (callback: () => void) => {
 // const log = debounce(()=>{ console.log('hello')},2000)
 // log()
 // log()
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = <T>(value:T, delay?: number)=> {
     const [debouncedValue, setDebounceValue] = useState(value)
     useEffect(() => {
         // 1. 设定一个延迟更新 delay延迟时间的间隔
