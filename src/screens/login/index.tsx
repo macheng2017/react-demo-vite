@@ -1,5 +1,7 @@
 import {FormEvent} from "react";
 
+
+const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
 export const LoginScreen = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -10,7 +12,7 @@ export const LoginScreen = () => {
     }
 
     const handleLogin = (params: { username: string, password: string }) => {
-        fetch(`http://localhost:3000/auth/login`, {
+        fetch(`${apiUrl}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,13 +23,18 @@ export const LoginScreen = () => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="userName">userName</label>
-            <input type="text" id="userName"/>
-
-            <label htmlFor="password">password</label>
-            <input type="password" id="password"/>
-            <button type="submit">submit</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="userName">userName</label>
+                    <input type="text" id="userName"/>
+                </div>
+                <div>
+                    <label htmlFor="password">password</label>
+                    <input type="password" id="password"/>
+                </div>
+                <button type="submit">submit</button>
+            </form>
+        </div>
     )
 }
